@@ -3,7 +3,22 @@ const modal = document.getElementById('artModal');
 const closeButton = modal.querySelector('.close');
 const searchButton = document.getElementById('searchBtn');
 const searchInput = document.getElementById('search');
+const historyList = document.getElementById('historyList');
 
+function getHistory() {
+    const gotHistory = localStorage.getItem('searchHistory');
+    return gotHistory ? JSON.parse(gotHistory) : [];
+}
+
+function saveHistory(history){
+    localStorage.setItem('searchHistory', JSON.stringify(history));
+}
+
+function addToSearchHistory(search){
+    const history = getHistory();
+    history.unshift(search);
+    saveHistory(history);
+}
 
 function searchArtWorks(input) {
     fetch('https://api.artic.edu/api/v1/artworks/search?q=' + input)
@@ -16,10 +31,23 @@ function searchArtWorks(input) {
         });
 }
 
+function updateHistoryDisplay(){
+    const history = getHistory();
+
+    historyList.innerHTML = '';
+
+    history.forEach(search => {
+        const li = document.createElement('li');
+        li.textContent = search;
+        historyList.appendChild(li);
+    });
+}
+
 searchButton.addEventListener('click', () => {
     const searchValue = searchInput.value.trim(); // Récupérer la valeur d'entrée
     if (searchValue) {
         searchArtWorks(searchValue); // Appeler la fonction de recherche
+        addToSearchHistory(searchValue);
     }
 });
 
@@ -98,3 +126,4 @@ closeButton.addEventListener('click', () => {
     modal.style.display = 'none';
 });
 
+updateHistoryDisplay();
