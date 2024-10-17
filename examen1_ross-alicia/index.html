@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./main.js" defer></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Recherche d'oeuvres d'art</h1>
+        <input type="text" id="search" placeholder="Rechercher une œuvre..." />
+        <button id="searchBtn">Rechercher</button>
+        
+        <div class="artworks"></div>
+        
+        <div id="artModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 id="modal-title"></h2>
+                <img id="modal-image" src="" alt="Image de l'œuvre" />
+                <p>Artiste : <span id="modal-artist"></span></p>
+                <p>Date de création : <span id="modal-date"></span></p>
+                <p>Description : <span id="modal-description"></span></p>
+                <p>Matériel utilisé : <span id="modal-material"></span></p>
+                <p>Termes de description : <span id="modal-terms"></span></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
